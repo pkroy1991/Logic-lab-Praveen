@@ -1,0 +1,330 @@
+\documentclass[11pt,twoside,reqno]{article}
+
+\usepackage{amsthm, amsmath, amscd, amssymb,centernot}
+\usepackage[left=2.5cm,top=2.5cm,bottom=3cm,right=2.5cm]{geometry}
+\setlength{\headheight}{10.2pt}
+\setlength\parskip{.1in}
+\setlength\parindent{0.2in}
+\date{November 13, 2024}
+\usepackage{tikz}
+\newcommand{\e}{\exp}
+\newcommand{\s}{\sigma}
+\usepackage{comment}
+
+\begin{document}
+\title{Assignment}
+\author{Praveen Kumar Roy}
+\maketitle
+\hrule
+
+
+\section{Probability}
+
+\begin{comment}
+({\bf Answer-1}) $N$ takes on values from the set $\{1,2,3,\ldots \}$ with 
+\begin{eqnarray*}
+P(N = 1) &=& P(\{H\}) = \frac{1}{2}, \\
+P(N = 2) &=& P(\{TH\}) = \frac{1}{2}\cdot \frac{1}{2} \\
+&...& \\
+P(N = k) &=& P(\{T...TH\}) = \left(\frac{1}{2}\right)^{k-1}\cdot \frac{1}{2}.
+\end{eqnarray*}
+Therefore, $N$ is a geometric random variable and its expectation is 
+\begin{eqnarray*}
+E[N] = \sum\limits_{k=1}^{\infty} kP(N=k) = \sum\limits_{k=1}^{\infty} k \left(\frac{1}{2}\right)^{k-1}\cdot \frac{1}{2} =  \sum\limits_{k=1}^{\infty} k \left(\frac{1}{2}\right)^{k}.
+\end{eqnarray*}
+Substituting $s := \sum\limits_{k=1}^{\infty} k \left(\frac{1}{2}\right)^{k}$, we observe 
+\begin{eqnarray*}
+s = \frac{1}{2}\left(s + \left(1-\frac{1}{2}\right)^{-1}\right),
+\end{eqnarray*}
+which gives $E[N] = s = 2$.\\
+Variance of $N$ is given by $\sigma^2 : = {\rm Var}(N) = E[(N - E[N])^2] = E[N^2] - 4E[N] + 4 = E[N^2] - 4$. Now using the identity 
+\[
+\sum_{k=1}^{\infty} k^2 x^k = \frac{x(1+x)}{(1-x)^3}
+\]
+we get $E[N^2] = 6$. Therefore, $\sigma^2 = 2$ and the standard deviation $\sigma = \sqrt{2}$.\\ \\ 
+({\bf Answer-2}) 
+(a) If $Y= 5X + 10$, then 
+\begin{eqnarray*}
+F_Y(a) = P(Y\leq a) = P(5X + 10 \leq a) = P(X \leq \frac{a-10}{5}) = F_X\left(\frac{a-10}{5}\right) = \int_{0}^{\frac{a-10}{5}} \frac{1}{5}dx. 
+\end{eqnarray*}
+Substituting $v = 5x + 10$, we get $dv = 5 dx$. The above integral now becomes:
+\[
+F_Y(a) = \int_{10}^{a} \frac{1}{5}\cdot \frac{1}{5}dv = \int_{10}^{a} \frac{1}{25}dv.
+\]
+Therefore, the probability density functions of $Y$ is 
+\begin{eqnarray*}
+       f_Y(y) =  \begin{cases}
+                      \frac{1}{25}, \; {\rm if} \; 10 < y < 35 \\
+                      0,  \;\; {\rm otherwise}.
+                      \end{cases}
+\end{eqnarray*}
+(b) If $Y= X^3 + 2X$, then for any $a \geq 0$, $g(x) = x^3 + 2x - a$ has only one real root. We call it $x_a$. Then,
+\[
+F_Y(a) = P(Y\leq a) = P(X^3 + 2X \leq a) = P(g(X) \leq 0) = P(X \leq X_a) =  F_X\left(X_a\right) = \int_{0}^{X_a} \frac{1}{5}dx. 
+\]
+Now substituting $v = x^3 + 2 x$, we get $dv = (3x^2 + 2)dx$. Therefore the above integral becomes
+\[
+F_Y(a) = \int_{0}^{a} \frac{1}{5}\cdot \frac{1}{3x^2 + 2}dv = \int_{0}^{a} \frac{1}{5}\cdot \frac{\tilde{x}}{3v - 4\tilde{x}}dv.
+\]
+In the above integral, $\tilde{x}$ is a solution of the cubic equation $v = x^3 + 2 x$ in terms of $v$. Therefore, the PDF of $Y$ is
+\begin{eqnarray*}                      
+        f_Y(v) =  \begin{cases}
+                       \frac{1}{5}\cdot \frac{\tilde{x}}{3v - 4\tilde{x}}, \quad  {\rm if} \; 0 < v < 135 \\
+                      0, \quad \quad \quad \quad \;{\rm otherwise}.
+                      \end{cases}; 
+\end{eqnarray*}\\
+(c) Let $U= {\rm Sin}(2\pi X)$. Note tha $U$ is one-to-one and onto map from $\frac{2i+1}{2} \leq X \leq \frac{2i+3}{2}$ to $ [-1,1]$, for every $i=0,1,2,..., {\rm etc}$. 
+Let $U_0$ denote the function $U_0 := {\rm Sin}(2\pi X)$ for $\frac{1}{2} \leq X \leq \frac{3}{2}$. Then, the data points for $U$ is same as $U_0$ spread over five interval of the form 
+ $\frac{2i+1}{2} \leq X \leq \frac{2i+3}{2}$. Hence for any $a \in [-1,1]$,   
+\begin{eqnarray*}
+F_U(a) = P(U \leq a) = 5P(U_0 \leq a) = 5P\left(X \leq \frac{{\rm Sin}^{-1}(a)}{2\pi}\right) = 5F_X\left(\frac{{\rm Sin}^{-1}(a)}{2\pi}\right) = 5\int_{0}^{\frac{{\rm Sin}^{-1}(a)}{2\pi}} \frac{1}{5}dx. 
+\end{eqnarray*}
+Now substituting $v ={\rm Sin}(2\pi X)$, we get $dv = 2\pi{\rm Cos}(2\pi X) dx$. Therefore the above integral becomes
+\[
+F_U(a) = \frac{1}{2\pi}\int_{-1}^{a}  \frac{1}{{\rm Cos}(2\pi X) } dv = \frac{1}{2\pi}\int_{-1}^{a}  \frac{1}{\sqrt{1-v^2}} dv.
+\]
+Hence the PDF for $U$ is 
+\begin{eqnarray*}     
+        f_U(v) =  \begin{cases}
+                       \frac{1}{2\pi \sqrt{1-v^2}}, \quad  {\rm if} \; -1 < v < 1 \\
+                      0, \quad \quad \quad \quad{\rm otherwise}.
+                      \end{cases}       
+\end{eqnarray*}
+\\
+({\bf Answer-3}) 
+\begin{enumerate}
+\item If open envelop contains $20$, I will choose closed one, as the only choice of numbers that can be there on closed envelop is 60 (since 20/3 is not a natural number). 
+My probability of winning in this case is 1. 
+\item If open envelop contains $150$, I will keep it as final. Although, there is a possibility that closed envelop contains $450$ which is higher than $150$, but it may also contain $50$ 
+which is smaller. In this case my winning probability is $\frac{1}{2}$. 
+\item If open envelop contains $300$, I will keep it as final with similar reasoning as in the above case. In this case too, I win with probability $\frac{1}{2}$. 
+\item If open envelop contains $600$, then I will choose open envelop as my final envelop, since $1800$ is not available and $200$ is smaller. In this case, I will win with 
+probability 1.
+\end{enumerate}
+({\bf Answer-4}) If $X$ is a normal random variable with parameter $\mu$ and $\sigma^2$, then for any $\alpha, \beta$, $\alpha X + \beta$ is a normal 
+random variable with parameter $\alpha \mu$ and $\alpha^2\sigma^2$. Moreover, if $Y$ is another normal random variable with parameter 
+$\mu'$ and $\sigma'^2$, then $X + Y$ is normal with parameter $\mu + \mu'$ and $\sigma^2 + \sigma'^2$. Using these we now answer the 
+question.
+\\
+(a) $P(X>Y) = P(X-Y > 0) = 1- P(X-Y \leq 0) = 1 - \frac{1}{\sqrt{2\pi}\sqrt{2}}\int\limits_{-\infty}^{0} e^{-x^2/4}dx = 1 - \frac{1}{\sqrt{2\pi}\sqrt{2}}\sqrt{\pi} = \frac{1}{2}.$\\
+(b) Note that either $|X| > |Y|$ or $|Y| > |X|$ or $|X| = |Y|$, and $P(|X| = |Y|) = 0$. Therefore, 
+\[
+P(|X| > |Y|) + P(|X| < |Y|) = 1.
+\] 
+Moreover, since $X$ and $Y$ are same random variable and both are symmetric around $0$, $$P(|X| > |Y|) = P(|X| < |Y|).$$ Hence, $P(|X| > |Y|) = \frac{1}{2}$.\\
+(c) Note that $Z = \sqrt{2}X$, therefore, 
+\[
+P(X>Z) = P((\sqrt{2}-1)X < 0) =   \frac{\sqrt{2}-1}{\sqrt{2\pi}}\int\limits_{-\infty}^{0} e^{-x^2/2}dx =  \frac{\sqrt{2}-1}{\sqrt{2\pi}}\cdot \frac{\sqrt{\pi}}{\sqrt{2}} = \frac{\sqrt{2}-1}{2} \approx 0.207.
+\]\\
+(d) As in part (c), $P(|X| > |Z|) =  P(|X| > \sqrt{2}|Y|)$. Since we always have either $|X| > \sqrt{2}|Y|$ or $|Y| > \sqrt{2}|X|$ or $\frac{1}{\sqrt{2}}|Y| < |X| < \sqrt{2}|Y|$. Therefore, their probabilities 
+sums up to $1$. Also note that $P(|X| > \sqrt{2}|Y|) = P(|Y| > \sqrt{2}|X|)$, therefore, 
+\[
+P(|X| > |Z|) = P(|X| > \sqrt{2}|Y|) = \frac{1}{2}\left(1 - P(\frac{1}{\sqrt{2}}|Y| < |X| < \sqrt{2}|Y|)\right).
+\]
+\\
+({\bf Answer-5}) Let us set the following for any $i = 1,2,\ldots 6$:
+\begin{eqnarray*}
+\text{State}-0&:& \text{Outcome $i$ has not occurred even once.} \\
+\text{State}-1&:& \text{Outcome $i$ occurred once.} \\
+\text{State}-2&:& \text{Outcome $i$ occurred twice.}
+\end{eqnarray*}
+Let $E_i$ denote the expected number of tosses required to reach from State-$i$ to State-$2$ for $i=0,1$.\\
+Then, 
+\begin{eqnarray}
+E_0 &=& 1 + \frac{1}{6}E_1 + \frac{5}{6}E_0 \\ 
+\Rightarrow E_0 &=& 6 + E_1.
+\end{eqnarray}
+The equation in (1) is obtained as follows: after tossing once, we get $i$ with probability $\frac{1}{6}$ and we move to State-1, or we do not get $i$ with probability $\frac{5}{6}$ 
+and we remain in State-0.\\
+By similar argument as above, we have 
+\[
+E_1 = 1 + \frac{1}{6}\cdot 0 + \frac{5}{6}E_0 \quad  \Rightarrow \quad E_1 = 1 + \frac{5}{6}E_0. 
+\]
+Now, substituting the above value of $E_1$ in equation (2), we get 
+\[
+E_0 = 6 + 1 + \frac{5}{6}E_0 \quad \Rightarrow \quad E_0 = 42.
+\]
+\end{comment}
+
+
+\section{Assignment-2}
+
+({\bf Answer-1}) Let $X$ and $Y$ are discrete. Then,
+\begin{eqnarray*}
+E[X + Y] &=& \sum\limits_{x \in X}\sum\limits_{y \in Y} (x+y) p_{X,Y}(x,y) \\
+&=& \sum\limits_{x \in X}\sum\limits_{y \in Y} xp_{X,Y}(x,y) + \sum\limits_{x \in X}\sum\limits_{y \in Y}yp_{X,Y}(x,y) \\
+&=& \sum\limits_{x \in X} x \sum\limits_{y \in Y} p_{X,Y}(x,y) + \sum\limits_{y \in Y} y \sum\limits_{x \in X}p_{X,Y}(x,y) \\
+&=& \sum\limits_{x \in X} x  p_{X}(x) + \sum\limits_{y \in Y} y p_{Y}(y) \\
+&=& E[X] + E[Y].
+\end{eqnarray*}
+Similarly, we can show $E[X + Y] = E[X] + E[Y]$, when $X$ and $Y$ are continuous. 
+
+({\bf Answer-2}) Variance of a random variable $X$ is defined as 
+\[
+Var(X) = E[(X-E[X])^2].
+\]
+Therefore,
+\begin{eqnarray*}
+Var(X + Y) &=&  E[(X + Y -E[X + Y])^2] \\
+&=&  E[(X + Y -E[X + Y])^2] \\
+&=& E[ ((X -E[X]) + (Y - E[Y]))^2] \\
+&=& Var(X) + Var(Y) + 2 E[(X -E[X])(Y - E[Y])]\\
+&=& Var(X) + Var(Y) + 2(E[XY] - E[X]E[Y]) \\
+&=& Var(X) + Var(Y) + 2Cov(X,Y).
+\end{eqnarray*}
+
+
+({\bf Answer-3}) $Cov(X,Y) = 0$ implies 
+
+\begin{eqnarray*}
+E[XY] = E[X]E[Y] \\
+\Rightarrow \int_{-\infty}^{\infty}\int_{-\infty}^{\infty}xy f_{X,Y}(x,y)dxdy = \int_{-\infty}^{\infty}x f_X(x)dx\int_{-\infty}^{\infty}y f_Y(y)dy\\
+\end{eqnarray*}
+This implies $f_{X,Y} = f_{X}\cdot f_{Y}$ and therefore, $X$ and $Y$ are functionally independent.  
+
+({\bf Answer-4}) Let $X_1, X_2, ..., X_n$ are $i.i.d.$ random variable each having mean $E[X_i] = \mu$. Weak law of large numbers states that
+\[
+\lim\limits_{n\mapsto \infty} P\left(\left|\frac{\sum_{i}X_i}{n} -\mu\right| > \varepsilon \right) = 0.
+\]
+
+\textit{Chebyshev's Inequality:} Let $X $ be a random variable with finite mean $\mu$ and finite variance $\sigma^2$ and let $k > 0$ be a positive integer. Then
+\[
+P(|X - \mu| \geq k) \leq \frac{\sigma^2}{k^2}.
+\]
+Let  
+\[
+\bar{X} := \frac{1}{n} \sum_{i=1}^n X_i
+\]
+Then,
+\begin{eqnarray*}
+E[\bar{X}] = \frac{1}{n}\sum_{i=1}^n E[X_i] = \frac{1}{n} n \mu = \mu \\
+Var(\bar{X}) = \sum_{i=1}^n \frac{1}{n^2}Var(X_i) = \frac{\sigma^2}{n}.
+\end{eqnarray*}
+Now, the Chebyshev's inequality for the random variable $\bar{X}$ gives:
+\begin{eqnarray*}
+P(|\bar{X} - \mu| \geq \varepsilon) &\leq& \frac{\sigma^2}{n \varepsilon^2} \\
+\Rightarrow \lim\limits_{n\mapsto \infty} P(|\bar{X} - \mu| \geq \varepsilon) &= &0. \quad \quad \text{(Since $\sigma^2 < \infty$)}
+\end{eqnarray*}
+\\
+({\bf Answer-5})
+Let $X_1,...,X_n$ are $i.i.d$ random variable with distribution as shown in the following figure.
+\begin{center}
+\begin{tikzpicture}
+    % Draw the real line
+    \draw[->] (-6, 0) -- (5, 0) node[right] {$\mathbb{R}$};
+
+    % Draw integer points on the real line as bullet points
+    \foreach \x in {-4, -3, -2, -1, 0, 1, 2, 3, 4,} {
+        \filldraw (\x, 0) circle (2pt);
+        \node[below] at (\x, 0) {\x};  % Label the integer points
+    }
+    
+  \foreach \x in {5,6,7} {
+        \draw (\x, 5) circle (2pt);
+        %\node[below] at (\x, 0) {\x};  % Label the integer points
+    }
+
+ \foreach \x in {-5,-6,-7} {
+        \draw (\x, 1) circle (2pt);
+        %\node[below] at (\x, 0) {\x};  % Label the integer points
+    }
+
+    % Bullet point at (0, 5)
+    \filldraw (0, 2) circle (2pt);
+    \node[above] at (0, 2) {$(0, 5)$};
+    
+     \foreach \x in {1, 2, 3, 4} {
+        \filldraw (\x, 5) circle (2pt);
+        \node[below] at (\x, 5) {(0,10)};  % Label the integer points
+    }
+    
+     \foreach \x in {-4, -3, -2, -1} {
+        \filldraw (\x, 1) circle (2pt);
+        \node[above] at (\x, 1) {(0,1)};  % Label the integer points
+    }
+
+\end{tikzpicture}
+\end{center}
+
+It is clear that the the distribution has finite mean (approximately $5$), but the variance is infinite. \textcolor{red}{Actually not, the above also has finite variance}. We need to modify a bit:
+
+The following distribution has mean $5$ and infinite variance. Note that, by making small adjustment to the graph, it can have infinite mean as well. 
+\begin{center}
+\begin{tikzpicture}
+    % Draw the real line
+    \draw[->] (-6, 0) -- (5, 0) node[right] {$\mathbb{R}$};
+
+    % Draw integer points on the real line as bullet points
+    \foreach \x in {-4, -3, -2, -1, 0, 1, 2, 3, 4} {
+        \filldraw (\x, 0) circle (2pt);
+        \node[below] at (\x, 0) {\x};  % Label the integer points
+    }
+ 
+ 
+    \filldraw (-3, 0.4) circle (2pt);
+    \node[above] at (-3, 0.4) {$(-3, 2)$};
+ 
+   \filldraw (-2, 0.5) circle (2pt);
+    \node[above] at (-2, 0.5) {$(-2, 3)$};
+ 
+   \filldraw (-1, 1) circle (2pt);
+    \node[above] at (-1, 1) {$(-1, 4)$};
+ 
+    % Bullet point at (0, 5)
+    \filldraw (0, 2) circle (2pt);
+    \node[above] at (0, 2) {$(0, 5)$};
+    
+     \filldraw (1, 3) circle (2pt);
+    \node[above] at (1, 3) {$(1, 6)$};
+    
+    \filldraw (2, 4) circle (2pt);
+    \node[above] at (2, 4) {$(2, 7)$};
+    
+      \filldraw (3, 5) circle (2pt);
+    \node[above] at (3, 5) {$(3, 8)$};
+    
+   
+\end{tikzpicture}
+\end{center}
+
+Let $X_i$ has distribution as above, if we randomly choose numbers from $X_i$, it is clear that the sum $\frac{1}{n}\sum_i X_i$ will not converge to $\mu = 5$. This 
+illustrate that the law of large number does not hold, in general, if we have infinite variance. 
+
+({\bf Answer-6 \& 7})
+Let $X$ be a random variable the Moment generating function, denoted $\phi_X$ and Characteristic function, denoted $\Phi$ are defined as follows:
+\begin{eqnarray*}
+\phi_X(t) := E[\e^{tX}] \\
+\Phi_X(t) := E[\e^{itX}]
+\end{eqnarray*}
+Note that $\phi_X(t)$ exist only if Taylor series expansion of $\e^{tX}$ around $t=0$ exist, whereas $\Phi_X(t)$ always exist. 
+
+Now, let $X_1,...,X_n$ are $i.i.d$ random variable with mean $\mu$ and variance $\s$. The \textit{Central Limit Theorem} states 
+\[
+\bar{X} = \frac{\sum_{i=1}^{n} X_i-n \mu}{\s\sqrt{n}} \sim N(0,1) =: Y
+\]
+Assuming that $\phi_{\bar{X}}(t)$ exist, we will show it to be equal to $\phi_{Y}(t) = E[\e^{tY}]$.
+
+Note that, since $E[Y] = 0$ and $E[Y^2] = Var(Y) = 1$, we have
+\begin{eqnarray*}
+E[\e^{tY}] &=& 1 + tE[Y] + \frac{t^2E[Y^2]}{2} + \ldots \\
+&\approx& 1 + \frac{t^2}{2}.
+\end{eqnarray*}
+
+Now, 
+\begin{eqnarray*}
+\phi_{\bar{X}}(t) &=& E[\e^{t\sum_{i=1}^n \frac{(X_i -\mu)}{\s\sqrt{n}}}] \\
+&=& E[\prod e^{t\frac{(X_i -\mu)}{\s\sqrt{n}}}] \\
+&=& \prod_{i=1}^{n} E[e^{t\frac{(X_i -\mu)}{\s\sqrt{n}}}] \\
+&=& \left( E[e^{t\frac{(X_1 -\mu)}{\s\sqrt{n}}}] \right)^n \\
+&=& \left( 1+  t\frac{(E[X_1] -\mu)}{\s\sqrt{n}} +  t^2\frac{E[(X_1 -\mu)^2]}{2( \s\sqrt{n})^2} + \ldots \right)^n \\
+&\approx& \left(1 +  t^2\frac{\s^2}{2(\s\sqrt{n})^2} \right)^n \\
+&=& \left(1 +    \frac{t^2}{2n} \right)^n 
+\end{eqnarray*}
+Taking $n \mapsto \infty$, we get $\e^{t^2/2}$. 
+
+If we would have used $\Phi_{\bar{X}}(t)$ instead, we would have got $\left(1 -  \frac{t^2}{2n} \right)^n$ and further taking $n \mapsto \infty$, we get the limit to be $\e^{-t^2/2}$. 
+
+
+
+
+\end{document}
