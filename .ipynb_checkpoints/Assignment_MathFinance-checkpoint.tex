@@ -182,22 +182,6 @@ E[XY] = E[X]E[Y] \\
 \end{eqnarray*}
 This implies $X$ and $Y$ are linearly independent but not necessarily functionally independent.  
 
-Let's take a closer look:
-
-$Cov(X,Y) = E[(X -E[X])(Y - E[Y])]$, therefore, if $Cov(X,Y) > 0$, we expect that both variables $X$ and $Y$ increase or decrease together 
-(since the product $(X -E[X])(Y - E[Y]) > 0$). Similarly, if the covariance is negative, we expect that if one variable increases other decreases. 
-In both the above cases, $X$ and $Y$ has either positive or negative linear relationship. But if $Cov(X,Y) = 0$, there is no linear relationship between 
-$X$ and $Y$. Although, this does not mean that there are no non-linear relationship either between $X$ and $Y$. Let us consider the following example:
-
-For $\theta \in [0, 2\pi]$, let us take a random variable $X$ and $Y$ defined as 
-
-$$X = Sin(\theta)$$
-$$Y = Cos(\theta).$$
-
-Note that $E[X] = 0$ and $E[Y] = 0$. Also $Sin(\theta) Cos(\theta) = \frac{1}{2} Sin(2 \theta)$, therefore $E[XY] = 0$ and hence $Cov(X, Y) = 0$. But $X = \sqrt{1- Y^2}$. 
-This shows that $X$ and $Y$ are not functionally independent. 
-
-
 ({\bf Answer-4}) Let $X_1, X_2, ..., X_n$ are $i.i.d.$ random variable each having mean $E[X_i] = \mu$. Weak law of large numbers states that
 \[
 \lim\limits_{n\mapsto \infty} P\left(\left|\frac{\sum_{i}X_i}{n} -\mu\right| > \varepsilon \right) = 0.
@@ -318,8 +302,13 @@ Now, let $X_1,...,X_n$ are $i.i.d$ random variable with mean $\mu$ and variance 
 \[
 \bar{X} = \frac{\sum_{i=1}^{n} X_i-n \mu}{\s\sqrt{n}} \sim N(0,1) =: Y
 \]
-Assuming that $\phi_{\bar{X}}(t)$ exist, we will show it to be equal to $\phi_{Y}(t) = E[\e^{tY}] = \frac{t^2}{2}$.
+Assuming that $\phi_{\bar{X}}(t)$ exist, we will show it to be equal to $\phi_{Y}(t) = E[\e^{tY}]$.
 
+Note that, since $E[Y] = 0$ and $E[Y^2] = Var(Y) = 1$, we have
+\begin{eqnarray*}
+E[\e^{tY}] &=& 1 + tE[Y] + \frac{t^2E[Y^2]}{2} + \ldots \\
+&\approx& 1 + \frac{t^2}{2}.
+\end{eqnarray*}
 
 Now, 
 \begin{eqnarray*}
@@ -333,7 +322,7 @@ Now,
 \end{eqnarray*}
 Taking $n \mapsto \infty$, we get $\e^{t^2/2}$. 
 
-If we would have used $\Phi_{\bar{X}}(t)$ instead, we would have got $\left(1 -  \frac{t^2}{2n} \right)^n$ and further taking $n \mapsto \infty$, we get the limit to be $\e^{-t^2/2}$ which is $\Phi_{Y}(t)$. 
+If we would have used $\Phi_{\bar{X}}(t)$ instead, we would have got $\left(1 -  \frac{t^2}{2n} \right)^n$ and further taking $n \mapsto \infty$, we get the limit to be $\e^{-t^2/2}$. 
 
 
 
