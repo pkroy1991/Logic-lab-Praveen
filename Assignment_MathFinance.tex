@@ -9,6 +9,7 @@
 \usepackage{tikz}
 \newcommand{\e}{\exp}
 \newcommand{\s}{\sigma}
+\newcommand{\p}{\partial}
 \usepackage{comment}
 
 \begin{document}
@@ -144,7 +145,6 @@ Now, substituting the above value of $E_1$ in equation (2), we get
 \[
 E_0 = 6 + 1 + \frac{5}{6}E_0 \quad \Rightarrow \quad E_0 = 42.
 \]
-\end{comment}
 
 
 \section{Assignment-2}
@@ -334,6 +334,90 @@ Now,
 Taking $n \mapsto \infty$, we get $\e^{t^2/2}$. 
 
 If we would have used $\Phi_{\bar{X}}(t)$ instead, we would have got $\left(1 -  \frac{t^2}{2n} \right)^n$ and further taking $n \mapsto \infty$, we get the limit to be $\e^{-t^2/2}$ which is $\Phi_{Y}(t)$. 
+\end{comment}
+
+\section{Assignment-3}
+
+
+({\bf Answer-1})
+Let $\langle S^N \rangle = \frac{b-a}{N}\sum\limits_{i=0}^{N} f(x_i)$, where $x_i$ are randomly chosen points from the interval $[a,b]$. Let $X$ be a uniform distributed random variable on $[a, b]$. 
+The expected value of $\langle S^N \rangle$ is as follows:
+\begin{eqnarray*}
+E(\langle S^N \rangle) &=& E(\frac{b-a}{N}\sum\limits_{i=0}^{N} f(x_i)) \\
+&=& \frac{b-a}{N}\sum\limits_{i=0}^{N} E( f(x_i)) \\
+&=& \frac{1}{N}\sum\limits_{i=0}^{N} \int\limits_{a}^b f(x)dx
+\end{eqnarray*}
+By law of large number we have 
+\[
+P\left(\lim\limits_{N \mapsto \infty} \langle S^N \rangle = \int\limits_{a}^b f(x)dx \right) = 1.
+\]
+
+({\bf Answer-2})
+
+Let $f(x) = \frac{4}{1+x^2}$ and $\langle S^N \rangle = E(\frac{1}{N}\sum\limits_{i=0}^{N} f(x_i))$. Then as seen in the above exercise, 
+\[
+E(\langle S^N \rangle) = \int\limits_{0}^1 f(x)dx.
+\]
+The error in the estimation is given by the standard deviation $\s$, computed as follows:
+\begin{eqnarray*}
+\s^2 &=& \s^2 \left( \frac{1}{N}\sum\limits_{i=0}^{N} f(x_i) \right)\\
+&=& \frac{1}{N^2} \sum\limits_{i=0}^{N} \s^2(f(x_i)) \\
+&=& \frac{1}{N^2} \sum\limits_{i=0}^{N} (E[f(x)^2] - E[f(x)]^2)  \\
+&=&\frac{E[f(x)^2] - E[f(x)]^2}{N} \\
+\Rightarrow \s &=& \frac{\sqrt{E[f(x)^2] - E[f(x)]^2}}{\sqrt{N}}.
+\end{eqnarray*}
+
+({\bf Answer-5})
+\begin{itemize}
+\item Let $dX = \mu dt + \s dB(t)$ where $B(t)$ is the Canonical Brownian Motion. 
+\begin{enumerate}
+\item[(a)] Let $f(X_t, t) = X_t^2.$ In this case, we have $\frac{\p f}{\p t} = 0, \frac{\p f}{\p X_t} = 2X_t,$ and $ \frac{\p^2 f}{\p X_t^2} = 2$. Thus, by Ito's lemma, we obtain 
+\begin{eqnarray*}
+df &=&  \frac{\p f}{\p t} dt + \frac{\p f}{\p X_t} dX_t + \frac{1}{2} \frac{\p^2 f}{\p X_t^2}\s^2 dt \\
+&=& \left( \frac{\p f}{\p t} + \frac{\p f}{\p X_t}\mu  \right)dt + \frac{\p f}{\p X_t} \s dB(t) + \frac{1}{2} \frac{\p^2 f}{\p X_t^2}  \s^2 dt \\
+&=& (2X_t\mu + \s^2)dt + 2X_t\s dB(t).
+\end{eqnarray*}
+\item[(b)] Let $f(X_t, t) = X_t^3.$ In this case, we have $\frac{\p f}{\p t} = 0, \frac{\p f}{\p X_t} = 3X_t^2,$ and $ \frac{\p^2 f}{\p X_t^2} = 6X_t$. Thus, by Ito's lemma, we obtain 
+\begin{eqnarray*}
+df &=& \left( \frac{\p f}{\p t} + \frac{\p f}{\p X_t}\mu  \right)dt + \frac{\p f}{\p X_t} \s dB(t) + \frac{1}{2} \frac{\p^2 f}{\p X_t^2}  \s^2 dt \\
+&=& 3X_t(X_t\mu + \s^2)dt + 3X_t^2\s dB(t).
+\end{eqnarray*}
+\item[(c)] Let $f(X_t, t) = log(X_t)$. Then $\frac{\p f}{\p t} = 0, \frac{\p f}{\p X_t} = \frac{1}{X_t},$ and $ \frac{\p^2 f}{\p X_t^2} = \frac{-1}{X_t^2}$. Thus, by Ito's lemma, we obtain 
+\begin{eqnarray*}
+df &=& \left( \frac{\p f}{\p t} + \frac{\p f}{\p X_t}\mu  \right)dt + \frac{\p f}{\p X_t} \s dB(t) + \frac{1}{2} \frac{\p^2 f}{\p X_t^2}  \s^2 dt \\
+&=& \frac{1}{X_t}\left(\mu - \frac{1}{2X_t} \s^2\right)dt + \frac{1}{X_t}\s dB(t).
+\end{eqnarray*}
+\end{enumerate}
+\item Let $\frac{dS}{S} = \mu dt + \s dB(t)$ where $B(t)$ is the Canonical Brownian Motion. 
+For $f(X_t, t) \in \mathcal{C}^2(\mathbb{R}^2, \mathbb{R})$, Ito's lemma states
+\begin{eqnarray*}
+df &=& \frac{\p f}{\p t} dt + \frac{\p f}{\p X_t} dX_t + \frac{1}{2} \frac{\p^2 f}{\p X_t^2} dX_t^2 \\
+&=& \frac{\p f}{\p t} dt + \frac{\p f}{\p X_t} (\mu X_t dt + \s X_t dB(t)) + \frac{1}{2} \frac{\p^2 f}{\p X_t^2} (\mu X_t dt + \s X_t dB(t))^2 \\
+&=& \frac{\p f}{\p t} dt + \frac{\p f}{\p X_t} (\mu X_t dt + \s X_t dB(t)) + \frac{1}{2} \frac{\p^2 f}{\p X_t^2} \s^2 X_t^2 dt \\
+&=& \left( \frac{\p f}{\p t} + \frac{\p f}{\p X_t} \mu X_t + \frac{1}{2} \frac{\p^2 f}{\p X_t^2} \s^2 X_t^2 \right)dt + \frac{\p f}{\p X_t}  \s X_t dB(t)\\
+\end{eqnarray*}
+\begin{enumerate}
+\item[(a)] Let $f(S_t, t) = S_t^2.$ In this case, we have $\frac{\p f}{\p t} = 0, \frac{\p f}{\p S_t} = 2S_t,$ and $ \frac{\p^2 f}{\p S_t^2} = 2$. Substituting these values in the above 
+equation we get 
+\begin{eqnarray*}
+df &=&  (2\mu S_t^2 + \s^2 S_t^2 )dt + 2\s S_t^2 dB(t) \\
+&=& S_t^2((2\mu + \s^2)dt + 2 \s dB(t)).
+\end{eqnarray*}
+\end{enumerate}
+\end{itemize}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
